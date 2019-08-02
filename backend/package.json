@@ -1,0 +1,25 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@google/maps": "^0.5.5",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "exceljs": "^1.13.0",
+    "express": "^4.17.1",
+    "mongo-xlsx": "^1.0.12",
+    "mongoose": "^5.5.12",
+    "multer": "^1.4.1",
+    "node-geocoder": "^3.23.0",
+    "shortid": "^2.2.14",
+    "then-request": "^6.0.2",
+    "uuid": "^3.3.2"
+  }
+}
