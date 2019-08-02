@@ -54,7 +54,7 @@ const storage = multer.diskStorage(
     res.send('<h1>TESTE</h1>');
   })
 
-  //Rota para pegar o arquivo exel com os deslocamentos
+  //Rota para pegar o arquivo excel com os deslocamentos
   router.post('/', (req, res) => {
     upload(req, res, err => {
       let model = new ExcelModelo();
@@ -85,8 +85,7 @@ const storage = multer.diskStorage(
 
           });
          
-        });
-       
+        }); 
       };
       }
     );
