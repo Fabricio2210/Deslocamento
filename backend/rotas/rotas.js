@@ -118,6 +118,16 @@ const storage = multer.diskStorage(
           })
           }else{
             const valores = res.json;
+            //Verificar se não achou os locais do deslocamento
+             if(valores.status === 'ZERO_RESULTS'){
+              ExcelModelo.findOneAndUpdate({idDoc:id},{"$push":{desl:"Erro"}}).then(()=>{
+              }).catch((erro)=>{
+                res.status(500).json({
+                  msg:"Erro na solicitação"
+                });
+              });
+            };
+             const errata = valores.geocoded_waypoints[1].partial_match;
             let totalDistance = 0;
             let leg = valores.routes[0].legs;
             for(let i=0; i<leg.length; ++i){
@@ -127,6 +137,10 @@ const storage = multer.diskStorage(
             };
             //Salvando os deslocamentos calculados no banco de dados
             let deslocamentoCalculado = Math.trunc(totalDistance)
+            //Caso dê um resultado parcial retorna erro
+            if(errata== true){
+              deslocamentoCalculado = "Erro";
+            };
             ExcelModelo.findOneAndUpdate({idDoc:id},{"$push":{desl:deslocamentoCalculado}}).then(()=>{
             }).catch((erro)=>{
               res.status(500).json({
