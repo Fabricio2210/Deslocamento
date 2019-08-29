@@ -101,15 +101,29 @@ const storage = multer.diskStorage(
     const interval = 1000;
     result.forEach((element,index) => {
       setTimeout(()=>{
+        //Ordenando os wayponts
+        function calcWay(){
+          if(dataDesloc.length == 0){
+            waypt = null;
+          }else{
+            for( let i = 0; i< dataDesloc.length; i++){
+              waypt = `${dataDesloc[i]} - State of ${estado}, Brazil`
+              wayArray.push(waypt)
+            };
+          };
+        };
         const estado = element.ESTADO;
         //Os locais do deslocamento são dividos por um "X" na planilha 
         const dataDesloc = element.DESLOCAMENTO.split("X");
         const primeiro = dataDesloc.shift();
         const ultimo = dataDesloc.pop();
+        let wayArray = [];
+        let waypt;
+        calcWay();
         googleMapsClient.directions({
           origin:`${primeiro},${estado}`,
           destination:`${ultimo},${estado}`,
-          waypoints: `${dataDesloc},${estado}`,
+          waypoints: wayArray,
           mode:"driving"
         },(erro,res)=>{
           if(erro){
