@@ -141,7 +141,11 @@ const storage = multer.diskStorage(
                 });
               });
             };
-             const errata = valores.geocoded_waypoints[1].partial_match;
+            //Verifica se houve algum resultado parcial
+             let sePartialMatch = valores.geocoded_waypoints.find((element)=>{
+              return element.partial_match == true
+            });
+            const errata = valores.geocoded_waypoints[1].partial_match;
             let totalDistance = 0;
             let leg = valores.routes[0].legs;
             for(let i=0; i<leg.length; ++i){
@@ -152,7 +156,7 @@ const storage = multer.diskStorage(
             //Salvando os deslocamentos calculados no banco de dados
             let deslocamentoCalculado = Math.trunc(totalDistance)
             //Caso dê um resultado parcial retorna erro
-            if(errata== true){
+            if(sePartialMatch!== undefined){
               deslocamentoCalculado = "Erro";
             };
             ExcelModelo.findOneAndUpdate({idDoc:id},{"$push":{desl:deslocamentoCalculado}}).then(()=>{
