@@ -64,7 +64,7 @@ export default {
       formData.append("file", this.file);
 
       axios
-        .post("http://localhost:3000/", formData, {})
+        .post("", formData, {})
         .then(res => {
           this.$notify({
             group: "sucesso",

@@ -111,7 +111,7 @@ export default {
   methods: {
     teste() {
       axios
-        .get(`http://localhost:3000/deslocamento`, {
+        .get(`/deslocamento`, {
           params: {
             idDoc: this.idDoc,
           },
@@ -143,7 +143,7 @@ export default {
       const len = this.info.length;
       this.isLoading = true;
       axios
-        .post("http://localhost:3000/deslocamento", {
+        .post("/deslocamento", {
           dataDesloc: this.info,
           dataId: this.idDoc,
         })
